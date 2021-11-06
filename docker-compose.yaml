@@ -2,6 +2,7 @@ version: '2'
 
 services:
   app:
+
     image: seneca-tech-task
     build:
       context: .
@@ -21,8 +22,10 @@ services:
       - 9229:9229
     volumes:
       - ./src:/app/src
+    depends_on:
+      - database
   database:
-    image: postgres:12.5-alpine
+    image: postgres:14-alpine
     user: postgres
     environment:
       - POSTGRES_USER=postgres

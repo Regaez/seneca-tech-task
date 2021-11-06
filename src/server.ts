@@ -11,7 +11,7 @@ export const createServer = async () => {
 
   server.listen(SERVICE_PORT, "::", (err) => {
     if (err) {
-      server.log.error(err)
+      server.log.error(err);
       process.exit(1);
     }
   });

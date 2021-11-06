@@ -7,7 +7,7 @@ CREATE TABLE sessions(
     user_id uuid NOT NULL,
     total_modules_studied INTEGER NOT NULL,
     average_score INTEGER NOT NULL,
-    started_at timestamptz NOT NULL DEFAULT NOW(),
-    ended_at timestamptz,
+    time_studied INTEGER NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT NOW(),
     PRIMARY KEY (session_id)
 );

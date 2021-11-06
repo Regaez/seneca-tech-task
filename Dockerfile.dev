@@ -1,0 +1,14 @@
+FROM node:16.13.0-alpine
+
+WORKDIR /app
+
+COPY package-lock.json ./
+COPY package.json ./
+COPY .npmrc ./
+
+RUN npm i
+
+# Copy app files
+COPY . ./
+
+ENTRYPOINT npm run start:development

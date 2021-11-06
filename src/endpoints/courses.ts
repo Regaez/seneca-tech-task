@@ -60,10 +60,9 @@ export const getCourseHandler: GetCourseHandler = async (request, response) => {
     case "NOT_FOUND":
       response.code(404);
       throw new Error("No course exists for given parameters.");
-    case "QUERY_FAILED": {
+    case "QUERY_FAILED":
       response.code(500);
       throw new Error("Internal server error.");
-    }
     default:
       assertUnreachable(error);
   }

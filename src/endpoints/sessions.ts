@@ -62,10 +62,9 @@ export const getSessionHandler: GetSessionHandler = async (request, response) =>
     case "NOT_FOUND":
       response.code(404);
       throw new Error("No session exists for given parameters.");
-    case "QUERY_FAILED": {
+    case "QUERY_FAILED":
       response.code(500);
       throw new Error("Internal server error.");
-    }
     default:
       assertUnreachable(error);
   }
@@ -106,10 +105,9 @@ export const postSessionHandler: PostSessionHandler = async (request, response) 
   const error = unwrap(result);
 
   switch (error) {
-    case "QUERY_FAILED": {
+    case "QUERY_FAILED":
       response.code(500);
       throw new Error("Internal server error.");
-    }
     default:
       assertUnreachable(error);
   }

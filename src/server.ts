@@ -4,6 +4,8 @@ import { logger } from "./utils";
 import {
   getSessionHandler,
   GET_SESSION_SCHEMA,
+  postSessionHandler,
+  POST_SESSION_SCHEMA,
 } from "./endpoints";
 
 export const createServer = async () => {
@@ -12,6 +14,14 @@ export const createServer = async () => {
   server.get("/healthcheck", { logLevel: "error" }, (_, res) => {
     res.code(200).send("OK");
   });
+
+  server.post(
+    "/courses/:courseId",
+    {
+      schema: POST_SESSION_SCHEMA,
+    },
+    postSessionHandler
+  );
 
   server.get(
     "/courses/:courseId/sessions/:sessionId",

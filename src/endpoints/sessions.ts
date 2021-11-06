@@ -1,6 +1,6 @@
 import { RouteHandler } from "fastify";
-import { getSession } from '../queries/sessions';
-import { assertUnreachable, isOk, unwrap, FromFastifySchema } from '../utils';
+import { getSession, upsertSession } from "../queries";
+import { assertUnreachable, isOk, unwrap, FromFastifySchema } from "../utils";
 
 export const SESSION_HEADERS_SCHEMA = {
   type: "object",
@@ -23,7 +23,7 @@ export const SESSION_BODY_SCHEMA = {
   additionalProperties: false
 } as const;
 
-export const SESSION_PARAMS_SCHEMA = {
+export const GET_SESSION_PARAMS_SCHEMA = {
   type: "object",
   required: ["courseId", "sessionId"],
   properties: {
@@ -35,7 +35,7 @@ export const SESSION_PARAMS_SCHEMA = {
 
 export const GET_SESSION_SCHEMA = {
   headers: SESSION_HEADERS_SCHEMA,
-  params: SESSION_PARAMS_SCHEMA,
+  params: GET_SESSION_PARAMS_SCHEMA,
   reply: SESSION_BODY_SCHEMA,
 } as const;
 
@@ -62,6 +62,50 @@ export const getSessionHandler: GetSessionHandler = async (request, response) =>
     case "NOT_FOUND":
       response.code(404);
       throw new Error("No session exists for given parameters.");
+    case "QUERY_FAILED": {
+      response.code(500);
+      throw new Error("Internal server error.");
+    }
+    default:
+      assertUnreachable(error);
+  }
+};
+
+export const POST_SESSION_PARAMS_SCHEMA = {
+  type: "object",
+  required: ["courseId"],
+  properties: {
+    courseId: { type: "string", format: "uuid" },
+  },
+  additionalProperties: false
+} as const;
+
+export const POST_SESSION_SCHEMA = {
+  headers: SESSION_HEADERS_SCHEMA,
+  params: POST_SESSION_PARAMS_SCHEMA,
+  body: SESSION_BODY_SCHEMA,
+} as const;
+
+export type PostSessionHandler = RouteHandler<FromFastifySchema<typeof POST_SESSION_SCHEMA>>;
+
+export const postSessionHandler: PostSessionHandler = async (request, response) => {
+
+  const result = await upsertSession({
+    courseId: request.params.courseId,
+    userId: request.headers['x-user-id'],
+    sessionId: request.body.sessionId,
+    totalModulesStudied: request.body.totalModulesStudied,
+    averageScore: request.body.averageScore,
+    timeStudied: request.body.timeStudied,
+  });
+
+  if (isOk(result)) {
+    return response.code(201).send();
+  }
+
+  const error = unwrap(result);
+
+  switch (error) {
     case "QUERY_FAILED": {
       response.code(500);
       throw new Error("Internal server error.");

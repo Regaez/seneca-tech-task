@@ -2,6 +2,8 @@ import fastify from "fastify";
 import { SERVICE_PORT } from "./configs";
 import { logger } from "./utils";
 import {
+  getCourseHandler,
+  GET_COURSE_SCHEMA,
   getSessionHandler,
   GET_SESSION_SCHEMA,
   postSessionHandler,
@@ -14,6 +16,14 @@ export const createServer = async () => {
   server.get("/healthcheck", { logLevel: "error" }, (_, res) => {
     res.code(200).send("OK");
   });
+
+  server.get(
+    "/courses/:courseId",
+    {
+      schema: GET_COURSE_SCHEMA,
+    },
+    getCourseHandler
+  );
 
   server.post(
     "/courses/:courseId",

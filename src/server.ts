@@ -13,8 +13,8 @@ import {
 export const createServer = (): FastifyInstance => {
   const server = fastify({ logger });
 
-  server.get("/healthcheck", { logLevel: "error" }, (_, res) => {
-    res.code(200).send("OK");
+  server.get("/healthcheck", { logLevel: "error" }, async (_, res) => {
+    return res.code(200).send("OK");
   });
 
   server.get(

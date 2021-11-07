@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expect } from "chai";
 import { unwrap, isOk, ok, isErr, err, Result, assertUnreachable } from "../../utils";
 
@@ -69,7 +70,7 @@ describe("Utils: result", () => {
 
   describe("assertUnreachable()", () => {
     it("should always throw an error when given any value", () => {
-      [0, 1, true, false, "foo", {}, [], () => {}, undefined, null]
+      [0, 1, true, false, "foo", {}, [], undefined, null]
         .forEach(value => {
           // @ts-ignore
           const fn = () => assertUnreachable(value);

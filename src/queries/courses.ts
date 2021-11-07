@@ -5,6 +5,8 @@ export type GetCourseError =
   | "QUERY_FAILED";
 
 export interface Course {
+  course_id: string;
+  user_id: string;
   total_modules_studied: number;
   average_score: number;
   time_studied: number;

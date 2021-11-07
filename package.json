@@ -1,6 +1,9 @@
 {
   "name": "seneca-tech-task",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=16.13.0"
+  },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
@@ -32,13 +35,17 @@
     "@types/chai": "4.2.22",
     "@types/mocha": "9.0.0",
     "@types/node": "16.11.6",
+    "@types/node-fetch": "2.5.12",
     "@types/pino": "6.3.12",
+    "@types/sinon": "10.0.6",
     "chai": "4.3.4",
     "concurrently": "6.3.0",
     "json-schema-to-ts": "1.6.4",
     "mocha": "9.1.3",
+    "node-fetch": "2.6.6",
     "nodemon": "2.0.14",
     "nyc": "15.1.0",
+    "sinon": "12.0.1",
     "ts-node": "10.4.0",
     "typescript": "4.4.4"
   },

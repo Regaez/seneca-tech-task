@@ -1,4 +1,4 @@
-import fastify from "fastify";
+import fastify, { FastifyInstance } from "fastify";
 import { SERVICE_PORT } from "./configs";
 import { logger } from "./utils";
 import {
@@ -10,7 +10,7 @@ import {
   POST_SESSION_SCHEMA,
 } from "./endpoints";
 
-export const createServer = async () => {
+export const createServer = (): FastifyInstance => {
   const server = fastify({ logger });
 
   server.get("/healthcheck", { logLevel: "error" }, (_, res) => {
@@ -47,4 +47,6 @@ export const createServer = async () => {
       process.exit(1);
     }
   });
+
+  return server;
 };

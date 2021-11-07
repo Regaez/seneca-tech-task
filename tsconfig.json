@@ -9,6 +9,7 @@
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedParameters": true,
     "moduleResolution": "node",
     // "types": [], /* Type declaration files to be included in compilation. */

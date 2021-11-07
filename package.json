@@ -20,7 +20,7 @@
     "start:production": "npm run clean && npm run build && node ./build/server/index.js",
     "stop": "npm run docker:stop:dev",
     "test": "npm run clean:build && npm run build && npm run test:server",
-    "test:server": "SERVICE_PORT=4000 LOG_LEVEL=silent NODE_ENV=test nyc mocah build/tests --recursive",
+    "test:server": "SERVICE_PORT=4000 LOG_LEVEL=silent NODE_ENV=test nyc mocha build/tests --recursive",
     "test:coverage": "nyc report --reporter=html && open ./coverage/index.html"
   },
   "repository": {

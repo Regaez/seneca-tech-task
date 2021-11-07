@@ -17,6 +17,8 @@ export const getCourse = async (params: {
   try {
     const [course] = await sql<Course[]>`
       SELECT
+        course_id,
+        user_id,
         SUM(total_modules_studied)::int as total_modules_studied,
         SUM(average_score)::int as average_score,
         SUM(time_studied)::int as time_studied
@@ -26,6 +28,8 @@ export const getCourse = async (params: {
         course_id = ${params.courseId}
       AND
         user_id = ${params.userId}
+      GROUP BY
+        course_id, user_id
     `;
 
     if (!course) {

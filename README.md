@@ -19,6 +19,7 @@
 - `npm run lint`: lint project files
 - `npm run test`: run test suite
 - `npm run test:coverage`: view test suite coverage in web browser
+- `npm run build:production`: build and tag docker image for production deploy
 
 ## Assumptions, TODOs, thoughts
 

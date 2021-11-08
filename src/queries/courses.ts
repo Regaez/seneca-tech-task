@@ -22,7 +22,7 @@ export const getCourse = async (params: {
         course_id,
         user_id,
         SUM(total_modules_studied)::int as total_modules_studied,
-        SUM(average_score)::int as average_score,
+        AVG(average_score)::real as average_score,
         SUM(time_studied)::int as time_studied
       FROM
         sessions

@@ -41,6 +41,7 @@ Some future TODOs that could improve the project:
   - Deploy on merge to main branch.
 - Instrument application with open tracing (instead of relying on logs)
 - Adjust test suite to test database integration instead of mocking DB calls
+- Implement tests for the DB queries as they contain logic, such as summing/averaging
 - Add git hooks to lint on commit, run tests before push.
 
 Thoughts regarding the service's API:
